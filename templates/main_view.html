@@ -7,10 +7,17 @@
 </head>
 <body>
     <img src="/static/favicon.ico">
-    <h1>This is main view!</h1>
-    <p> {{message}} </p>
-    <img src="/static/favicon.ico">
-    <br>List all configurations<br>
-    {{config.key}}:{{config.value}}
+    <br>
+    <h2>{{num_of_items}} configuration items found:</h2>
+    <ul>
+        {% for item in items %}
+        <li>
+            <a href="{{url_for('load_item_by_index', index=loop.index0)}}">
+                {{item.key}}:{{item.value}}
+            </a>
+            <img src="/static/favicon.ico">
+        </li>
+        {% endfor %}
+    </ul>
 </body>
 </html>

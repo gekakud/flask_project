@@ -7,7 +7,7 @@
 <body>
     <a href="{{ url_for('show_main_view')}}">Back to main view</a><br>
     <img src="/static/favicon.ico"><br>
-    Config {{index}} is<br>
+    Config item #{{index}}<br>
     {{config.key}}:{{config.value}}<br>
     <button>
         {% if index < max_index %}
