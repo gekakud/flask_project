@@ -1,18 +1,18 @@
 [
   {
+    "key": "config_0",
+    "value": "0123"
+  },
+    {
     "key": "config_1",
-    "value": "123"
+    "value": "1234"
   },
     {
     "key": "config_2",
-    "value": "234"
+    "value": "2345"
   },
     {
     "key": "config_3",
-    "value": "345"
-  },
-    {
-    "key": "config_4",
-    "value": "456"
+    "value": "3456"
   }
 ]
