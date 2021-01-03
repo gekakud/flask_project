@@ -28,6 +28,11 @@ class MongoDbWrapper:
     def get_all_configs(self):
         return self.configs_collection.find({})
 
+    def get_config_by_key(self, config_key):
+        # exclude _id
+        xx = self.configs_collection.find_one({'key': config_key}, {'_id' : 0})
+        return xx
+
     def configs_count(self):
         return self.configs_collection.count_documents(filter={})
 
@@ -43,6 +48,7 @@ mongo_client = MongoDbWrapper(common.mongodb_connection_string)
 # tt = mongo_client.is_config_exist('ggg')
 # mongo_client.update_config_value({'key':'aa', 'value':'uraaaa'})
 # mongo_client.delete_config('ggg')
+# rr = mongo_client.get_config_by_key('aa')
 # bb = mongo_client.get_all_configs()
 # for x in bb:
 #     print(x)

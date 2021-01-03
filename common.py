@@ -1,6 +1,6 @@
 # common strings
 main_view_page_title = "Main view"
-item_view_page_title = "View:item "
+item_view_page_title = "item "
 not_found_error_message = "ERROR 404 - resource not found!"
 
 # configs

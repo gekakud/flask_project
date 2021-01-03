@@ -10,10 +10,10 @@
     <br>
     <h2>{{num_of_items}} configuration items found:</h2>
     <ul>
-        {% for item in items %}
+        {% for config in configs %}
         <li>
-            <a href="{{url_for('load_item_by_index', index=loop.index0)}}">
-                {{item.key}}:{{item.value}}
+            <a href="{{url_for('load_item_by_index', key=config.key)}}">
+                {{config.key}}:{{config.value}}
             </a>
             <img src="/static/favicon.ico">
         </li>

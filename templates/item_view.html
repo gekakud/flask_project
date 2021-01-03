@@ -7,18 +7,7 @@
 <body>
     <a href="{{ url_for('show_main_view')}}">Back to main view</a><br>
     <img src="/static/favicon.ico"><br>
-    Config item #{{index}}<br>
-    {{config.key}}:{{config.value}}<br>
-    <button>
-        {% if index < max_index %}
-            <a href="{{url_for('load_item_by_index', index=index+1)}}">
-            Next config
-            </a>
-        {% else %}
-            <a href="{{url_for('load_item_by_index', index=0)}}">
-            Start Over
-            </a>
-        {% endif %}
-    </button>
+    <h2>Config item key: {{key}}</h2>
+    <h2>Config item value: {{config.value}}</h2>
 </body>
 </html>
