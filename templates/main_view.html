@@ -8,6 +8,9 @@
 <body>
     <img src="/static/favicon.ico">
     <br>
+    <button>
+        <a href="{{url_for('add_new_config')}}">Add new config</a>
+    </button>
     <h2>{{num_of_items}} configuration items found:</h2>
     <ul>
         {% for config in configs %}
@@ -16,6 +19,12 @@
                 {{config.key}}:{{config.value}}
             </a>
             <img src="/static/favicon.ico">
+            <button>
+                <a href="{{url_for('delete_config', key=config.key)}}">Delete</a>
+            </button>
+            <button>
+                <a href="{{url_for('edit_config', key=config.key)}}">Edit</a>
+            </button>
         </li>
         {% endfor %}
     </ul>

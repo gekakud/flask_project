@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+</head>
+<body>
+<a href="{{ url_for('show_main_view')}}">Back to main view</a><br>
+    <img src="/static/favicon.ico"><br>
+    <h2>Add new config</h2>
+    <form method="post">
+        <p>
+            Config name:
+            <input type="text" name="config_name">
+        </p>
+        <p>
+            Config value:
+            <input type="text" name="config_value">
+        </p>
+        <p>
+            Config type:
+            <input type="text" name="config_type">
+        </p>
+        <button type="submit">Create</button>
+    </form>
+</body>
+</html>
