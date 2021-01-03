@@ -1,0 +1,18 @@
+[
+  {
+    "key": "config_1",
+    "value": "123"
+  },
+    {
+    "key": "config_2",
+    "value": "234"
+  },
+    {
+    "key": "config_3",
+    "value": "345"
+  },
+    {
+    "key": "config_4",
+    "value": "456"
+  }
+]
