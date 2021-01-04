@@ -14,38 +14,50 @@
 <body>
     <main>
         <div class="container">
-            <div class="text-center my-5">
-                <div class="datatable-inner table-responsive ps ps--active-y">
-                    <table class="table">
-                        <thead class="table-light">
-                            <tr>
-                                <th scope="col" class="text-start">
-                                    <a role="button" class="btn" data-mdb-toggle="modal" data-mdb-target="#newConfig">
-                                        <i class="fas fa-plus"></i>
-                                    </a>
-                                </th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Value</th>
-                            </tr>
-                        </thead>
-                        <tbody class="datatable-body">
-                            {% for config in configs %}
-                            <tr scope="row" data-mdb-index="0">
-                                <td data-mdb-field="actions" false="" class="text-start px-4">
-                                    <a role="button" class="text-muted ms-2" data-mdb-index="0"
-                                        href="{{url_for('edit_config', key=config.key)}}"><i
-                                            class="far fa-edit"></i></a>
-                                    <a role="button" class="text-muted ms-2" data-mdb-index="0"
-                                        href="{{url_for('delete_config', key=config.key)}}"><i
-                                            class="fa fa-trash-alt"></i></a>
-                                </td>
-                                <td data-mdb-field="name" false="">{{config.key}}</td>
-                                <td data-mdb-field="value" false="">{{config.value}}</td>
-                            </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
+            <div class="row">
+                <div class="text-center my-5">
+                    <div class="datatable-inner table-responsive ps ps--active-y">
+                        <table class="table">
+                            <thead class="table-light">
+                                <tr>
+                                    <th scope="col" class="text-start">
+                                        <a role="button" class="btn" data-mdb-toggle="modal" data-mdb-target="#newConfig">
+                                            <i class="fas fa-plus"></i>
+                                        </a>
+                                    </th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Value</th>
+                                    <th scope="col">Set New Value</th>
+                                    <th scope="col">Apply</th>
+                                </tr>
+                            </thead>
+                            <tbody class="datatable-body">
+                                {% for config in configs %}
+                                <tr scope="row" data-mdb-index="0">
+                                    <td data-mdb-field="actions" false="" class="text-start px-4">
+                                        <a role="button" class="btn text-muted ms-2" data-mdb-index="0"
+                                            href="{{url_for('delete_config', key=config.key)}}"><i
+                                                class="fa fa-trash-alt"></i></a>
+                                    </td>
+                                    <td data-mdb-field="name" false="">{{config.key}}</td>
+                                    <td data-mdb-field="value" false="">{{config.value}}</td>
+                                    <td>
+                                        <form id="editform{{config.key}}" action="{{ url_for('edit_config') }}" method="post">
+                                            <div class="form-outline mb-3">
+                                                <input value = "{{config.key}}" type="hidden" name="hidden_key">
+                                                <input type="text" class="form-control" id="id-{{config.key}}" name="new_config_value" />
+                                                <label class="form-label" for="config-name">{{config.value}}</label>
+                                            </div>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <button type="submit" class="btn" form="editform{{config.key}}"><i class="fas fa-save"></i></button>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
 
                 <!-- Modal -->
                 <div class="modal fade" id="newConfig" tabindex="-1" aria-labelledby="newConfigLabel"
@@ -78,6 +90,10 @@
                         </div>
                     </div>
                 </div>
+                </div>
+            </div>
+            <div class="row">
+                <textarea class="form-control" rows="10">{{generated_text}}</textarea>
             </div>
         </div>
     </main>
