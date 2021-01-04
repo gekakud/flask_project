@@ -3,20 +3,25 @@ from flask import Flask, send_from_directory, render_template, abort, request, r
 from mongo_db import mongo_client
 import common as cmn
 
-# from dummy_db import db
-
 # ctor - creates global flask app
 app = Flask(__name__)
 
 
 # decorates show_main_view func
-@app.route("/")
+@app.route("/", methods=["GET", "POST"])
 # view function
 def show_main_view():
-    return render_template("main_view.html",
-                           title=cmn.main_view_page_title,
-                           num_of_items=mongo_client.configs_count(),
-                           configs=mongo_client.get_all_configs())
+    if request.method == "POST":
+        print("POST new config")
+        new_config = {'key': request.form['config_name'], 'value': request.form['config_value']}
+        mongo_client.insert_new_config(new_config)
+        return redirect(url_for("show_main_view"))
+    else:
+        print("GET all")
+        return render_template("main_view.html",
+                               title=cmn.main_view_page_title,
+                               num_of_items=mongo_client.configs_count(),
+                               configs=mongo_client.get_all_configs())
 
 
 @app.route("/load_item/<string:key>")
@@ -34,7 +39,9 @@ def load_item_by_index(key):
 
 @app.route("/add_config", methods=["GET", "POST"])
 def add_new_config():
+    print("in add_new_config")
     if request.method == "POST":
+        print("post detected")
         new_config = {'key': request.form['config_name'], 'value': request.form['config_value']}
         mongo_client.insert_new_config(new_config)
         return redirect(url_for("show_main_view"))
@@ -54,9 +61,3 @@ def edit_config(key):
 def delete_config(key):
     mongo_client.delete_config(key)
     return redirect(url_for("show_main_view"))
-
-
-# TODO: fix this to load webpage icon
-@app.route('/favicon.ico')
-def show_favicon():
-    return send_from_directory(os.path.join(app.root_path, 'static'), 'favicon.ico')

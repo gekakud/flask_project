@@ -1,32 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" type="image/x-icon" href="https://logo.stocklight.com/NASDAQ/DSPG_icon.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.0.0/mdb.min.css" rel="stylesheet" />
     <title>{{title}}</title>
 </head>
+
 <body>
-    <img src="/static/favicon.ico">
-    <br>
-    <button>
-        <a href="{{url_for('add_new_config')}}">Add new config</a>
-    </button>
-    <h2>{{num_of_items}} configuration items found:</h2>
-    <ul>
-        {% for config in configs %}
-        <li>
-            <a href="{{url_for('load_item_by_index', key=config.key)}}">
-                {{config.key}}:{{config.value}}
-            </a>
-            <img src="/static/favicon.ico">
-            <button>
-                <a href="{{url_for('delete_config', key=config.key)}}">Delete</a>
-            </button>
-            <button>
-                <a href="{{url_for('edit_config', key=config.key)}}">Edit</a>
-            </button>
-        </li>
-        {% endfor %}
-    </ul>
+    <main>
+        <div class="container">
+            <div class="text-center my-5">
+                <div class="datatable-inner table-responsive ps ps--active-y">
+                    <table class="table">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col" class="text-start">
+                                    <a role="button" class="btn" data-mdb-toggle="modal" data-mdb-target="#newConfig">
+                                        <i class="fas fa-plus"></i>
+                                    </a>
+                                </th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Value</th>
+                            </tr>
+                        </thead>
+                        <tbody class="datatable-body">
+                            {% for config in configs %}
+                            <tr scope="row" data-mdb-index="0">
+                                <td data-mdb-field="actions" false="" class="text-start px-4">
+                                    <a role="button" class="text-muted ms-2" data-mdb-index="0"
+                                        href="{{url_for('edit_config', key=config.key)}}"><i
+                                            class="far fa-edit"></i></a>
+                                    <a role="button" class="text-muted ms-2" data-mdb-index="0"
+                                        href="{{url_for('delete_config', key=config.key)}}"><i
+                                            class="fa fa-trash-alt"></i></a>
+                                </td>
+                                <td data-mdb-field="name" false="">{{config.key}}</td>
+                                <td data-mdb-field="value" false="">{{config.value}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Modal -->
+                <div class="modal fade" id="newConfig" tabindex="-1" aria-labelledby="newConfigLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="newConfigLabel">New configuration</h5>
+                                <button type="button" class="btn-close" data-mdb-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="configform" method="post">
+                                    <div class="form-outline mb-3">
+                                        <input type="text" class="form-control" id="config-name" name="config_name" />
+                                        <label class="form-label" for="config-name">Name</label>
+                                    </div>
+                                    <div class="form-outline mb-3">
+                                        <input type="text" class="form-control" id="config-value" name="config_value" />
+                                        <label class="form-label" for="config-value">Value</label>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-mdb-dismiss="modal">
+                                    Cancel
+                                </button>
+                                <button type="submit" class="btn btn-primary" form="configform">Create</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
 </body>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.0.0/mdb.min.js"></script>
+
 </html>
