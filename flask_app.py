@@ -1,4 +1,4 @@
-from flask import Flask, send_from_directory, render_template, abort, request, redirect, url_for
+from flask import Flask, render_template, abort, request, redirect, url_for
 from mongo_db import mongo_client
 import common as cmn
 
@@ -36,18 +36,7 @@ def show_main_view():
                                    generated_text=gen_text)
     except Exception:
         print("show_main_view failed")
-
-
-@app.route("/load_item/<string:key>")
-def load_item_by_index(key):
-    try:
-        config = mongo_client.get_config_by_key(key)
-        return render_template("item_view.html",
-                               title=str(cmn.item_view_page_title + key),
-                               config=config,
-                               key=key)
-    except IndexError:
-        abort(404, cmn.not_found_error_message)
+        abort(500, cmn.not_found_error_message)
 
 
 @app.route("/add_config", methods=["GET", "POST"])
