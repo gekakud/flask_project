@@ -15,3 +15,6 @@ project_id = 1402
 branch_name = "B_dev_ci_test_dbm10l"
 gl_url = "http://gitlab.dspg.com"
 gl_token = "ogptTez3HiMDR5ZS5Gy1"
+
+curr_dir = ""
+all_builds_folder_path = "C:\\a_work\gitlab_runner\\builds\s_gtD_Ee\\0\hd-mobile\\all_builds"

@@ -39,7 +39,14 @@ class MongoDbWrapper:
     def __init__(self, connection_string):
         self.client = MongoClient(connection_string)
         self.db = self.client.get_database('demo_configs_db')
+        if self.db.list_collection_names().count("ConfigsCollection") == 0:
+            self.db.create_collection("ConfigsCollection")
+
+        if self.db.list_collection_names().count("FwImagesCollection") == 0:
+            self.db.create_collection("FwImagesCollection")
+
         self.configs_collection = self.db.get_collection('ConfigsCollection')
+        self.fm_collection = self.db.get_collection('FwImagesCollection')
 
 
 mongo_client = MongoDbWrapper(common.mongodb_connection_string)
